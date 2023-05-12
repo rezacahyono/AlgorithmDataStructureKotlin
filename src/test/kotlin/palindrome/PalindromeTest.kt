@@ -8,14 +8,14 @@ class PalindromeTest {
 
     @Test
     fun wordIsPalindromeReturnTrue() {
-        val palindrome = PalindromeApp()
+        val palindrome = Palindrome()
         val word = "Madam in Eden Im Adam"
         assertTrue(palindrome.check(word))
     }
 
     @Test
     fun wordIsNotPalindromeReturnFalse() {
-        val palindrome = PalindromeApp()
+        val palindrome = Palindrome()
         val word = "Aot"
         assertFalse(palindrome.check(word))
     }

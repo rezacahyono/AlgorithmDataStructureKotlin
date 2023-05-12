@@ -1,6 +1,6 @@
 package palindrome
 
-class PalindromeApp {
+class Palindrome {
 
     fun check(value: String): Boolean {
         val word = value.uppercase().filterNot { it.isWhitespace() }
