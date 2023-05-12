@@ -1,13 +1,14 @@
 package linkedlist
 
-import java.util.LinkedList
 
-class LinkedListApp<T> {
+class LinkedListApp<T> : Iterable<T>, Collection<T>, MutableIterable<T>, MutableCollection<T> {
     private var head: Node<T>? = null
     private var tail: Node<T>? = null
-    var size = 0
+    override var size = 0
+        private set
 
-    fun isEmpty(): Boolean {
+
+    override fun isEmpty(): Boolean {
         return size == 0
     }
 
@@ -94,7 +95,7 @@ class LinkedListApp<T> {
         var current = head
 
         var next = current.next
-        while (next!=null){
+        while (next != null) {
             prev = current
             current = next
             next = current.next
@@ -111,13 +112,183 @@ class LinkedListApp<T> {
     fun removeAfter(node: Node<T>): T? {
         val result = node.next?.value
 
-        if (node.next == tail){
+        if (node.next == tail) {
             tail = node
         }
-        if (node.next != null){
+        if (node.next != null) {
             size--
         }
         node.next = node.next?.next
         return result
     }
+
+    /**
+     * Iteration and MutableIterator
+     */
+    override fun iterator(): MutableIterator<T> {
+        return LinkedListIterator(this)
+    }
+
+
+    /**
+     * MutableCollection
+     */
+
+    override fun add(element: T): Boolean {
+        append(element)
+        return true
+    }
+
+    override fun addAll(elements: Collection<T>): Boolean {
+        for (element in elements) {
+            append(element)
+        }
+        return true
+    }
+
+    override fun clear() {
+        head = null
+        tail = null
+        size = 0
+    }
+
+    override fun remove(element: T): Boolean {
+        val iterator = iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item == element) {
+                iterator.remove()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun removeAll(elements: Collection<T>): Boolean {
+        var result = false
+        for (item in elements) {
+            result = remove(item) || result
+        }
+        return result
+    }
+
+    override fun retainAll(elements: Collection<T>): Boolean {
+        var result = false
+        val iterator = this.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (!elements.contains(item)) {
+                iterator.remove()
+                result = true
+            }
+        }
+        return result
+    }
+
+    /**
+     * Collection
+     */
+    override fun containsAll(elements: Collection<T>): Boolean {
+        for (searched in elements) {
+            if (!contains(searched)) return false
+        }
+        return true
+    }
+
+    override fun contains(element: T): Boolean {
+        for (item in this) {
+            if (item == element) return true
+        }
+        return false
+    }
+
+}
+
+/**
+ * Print Reverse
+ */
+fun <T> LinkedListApp<T>.printInReverse() {
+    this.nodeAt(0)?.printInReverse()
+}
+
+fun <T> Node<T>.printInReverse() {
+    this.next?.printInReverse()
+    if (this.next != null) {
+        print(" -> ")
+    }
+    print(this.value.toString())
+}
+
+/**
+ * Get Middle node linkedlist
+ */
+fun <T> LinkedListApp<T>.getMiddle(): Node<T>? {
+    var slow = this.nodeAt(0)
+    var fast = this.nodeAt(0)
+
+    while (fast != null) {
+        fast = fast.next
+        if (fast != null) {
+            fast = fast.next
+            slow = slow?.next
+        }
+    }
+
+    return slow
+}
+
+/**
+ * Reversed
+ */
+private fun <T> addInReverse(list: LinkedListApp<T>, node: Node<T>) {
+
+    val next = node.next
+    if (next != null) {
+        addInReverse(list, next)
+    }
+    list.append(node.value)
+}
+
+fun <T> LinkedListApp<T>.reversed(): LinkedListApp<T> {
+    val result = LinkedListApp<T>()
+    val head = this.nodeAt(0)
+    if (head != null) {
+        addInReverse(result, head)
+    }
+    return result
+}
+
+/**
+ * Merge sorted
+ */
+fun <T: Comparable<T>> LinkedListApp<T>.mergeSorted(otherList: LinkedListApp<T>): LinkedListApp<T> {
+    if (this.isEmpty()) return otherList
+    if (otherList.isEmpty()) return this
+
+    val result = LinkedListApp<T>()
+
+    var left = nodeAt(0)
+    var right = otherList.nodeAt(0)
+
+    while (left != null && right !=null){
+        if (left.value < right.value ){
+            left = append(result, left)
+        }else {
+            right = append(result, right)
+        }
+    }
+
+    while (left != null) {
+        left = append(result, left)
+    }
+    while (right != null) {
+        right = append(result, right)
+    }
+
+    return result
+}
+
+private fun <T: Comparable<T>> append(result: LinkedListApp<T>, node: Node<T>): Node<T>?{
+    result.append(node.value)
+    return node.next
 }

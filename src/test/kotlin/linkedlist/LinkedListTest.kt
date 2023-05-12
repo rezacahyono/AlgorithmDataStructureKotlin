@@ -39,7 +39,7 @@ class LinkedListTest {
         assertEquals(list.toString(), "1 -> 2 -> 3", message = "Before inserting")
 
         var middleNode = list.nodeAt(1)!!
-        for (i in 1..3){
+        for (i in 1..3) {
             middleNode = list.insert(-1 * i, middleNode)
         }
         assertEquals(list.toString(), "1 -> 2 -> -1 -> -2 -> -3 -> 3")
@@ -76,5 +76,116 @@ class LinkedListTest {
         val removeAfterValue = list.removeAfter(node)
         assertEquals(list.toString(), "1 -> 3", message = "After removeAfter list")
         assertEquals(removeAfterValue.toString(), "2")
+    }
+
+    @Test
+    fun iterateLinkedList() {
+        val list = LinkedListApp<Int>()
+        list.push(3).push(2).push(1)
+        println(list)
+        for (item in list){
+            println("Double: ${item * 2}")
+        }
+    }
+
+    @Test
+    fun removingElements() {
+        val list: MutableCollection<Int> = LinkedListApp()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        println(list)
+
+        list.remove(1)
+        println(list)
+    }
+
+    @Test
+    fun removeAllElements() {
+        val list: MutableCollection<Int> = LinkedListApp()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        list.add(4)
+        list.add(5)
+        println(list)
+
+        list.removeAll(listOf(3,2,1))
+        println(list)
+    }
+
+    @Test
+    fun retainingElements() {
+        val list: MutableCollection<Int> = LinkedListApp()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        list.add(4)
+        list.add(5)
+        println(list)
+
+        list.retainAll(listOf(3,2,1))
+        println(list)
+    }
+
+    @Test
+    fun printReverseLinkedList() {
+        val list = LinkedListApp<Int>()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        list.add(4)
+        list.add(5)
+
+        println(list.toString())
+        list.printInReverse()
+    }
+
+    @Test
+    fun getMiddleLinkedList() {
+        val list = LinkedListApp<Int>()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        list.add(4)
+        list.add(5)
+
+        assertEquals(list.getMiddle()?.value, 1 )
+    }
+
+    @Test
+    fun reversedLinkedList() {
+        val list = LinkedListApp<Int>()
+        list.add(3)
+        list.add(2)
+        list.add(1)
+        list.add(4)
+        list.add(5)
+
+        println("Original: $list")
+        println("Reversed: ${list.reversed()}")
+    }
+
+    @Test
+    fun mergeLinkedList() {
+        val list = LinkedListApp<Int>()
+        list.add(1)
+        list.add(2)
+        list.add(3)
+        list.add(4)
+        list.add(5)
+
+        val otherList = LinkedListApp<Int>()
+        otherList.add(-1)
+        otherList.add(0)
+        otherList.add(2)
+        otherList.add(2)
+        otherList.add(7)
+
+        println("List: $list")
+        println("Other List: $otherList")
+
+        val mergeList = list.mergeSorted(otherList)
+        println("Merge List: $mergeList")
     }
 }
