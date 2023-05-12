@@ -18,14 +18,14 @@ class LinkedListTest {
 
     @Test
     fun pushLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         assertEquals(list.toString(), "1 -> 2 -> 3")
     }
 
     @Test
     fun appendLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.append(1)
         list.append(2)
         list.append(3)
@@ -34,7 +34,7 @@ class LinkedListTest {
 
     @Test
     fun insertLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         assertEquals(list.toString(), "1 -> 2 -> 3", message = "Before inserting")
 
@@ -47,7 +47,7 @@ class LinkedListTest {
 
     @Test
     fun popLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         assertEquals(list.toString(), "1 -> 2 -> 3", message = "Before popping list")
         val poppedValue = list.pop()
@@ -57,7 +57,7 @@ class LinkedListTest {
 
     @Test
     fun removeLastLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         assertEquals(list.toString(), "1 -> 2 -> 3", message = "Before removeLast list")
         val removeLastValue = list.removeLast()
@@ -69,7 +69,7 @@ class LinkedListTest {
 
     @Test
     fun removeAfterLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         assertEquals(list.toString(), "1 -> 2 -> 3", message = "Before removeAfter list")
         val node = list.nodeAt(0)!!
@@ -80,7 +80,7 @@ class LinkedListTest {
 
     @Test
     fun iterateLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.push(3).push(2).push(1)
         println(list)
         for (item in list){
@@ -90,7 +90,7 @@ class LinkedListTest {
 
     @Test
     fun removingElements() {
-        val list: MutableCollection<Int> = LinkedListApp()
+        val list: MutableCollection<Int> = LinkedList()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -102,7 +102,7 @@ class LinkedListTest {
 
     @Test
     fun removeAllElements() {
-        val list: MutableCollection<Int> = LinkedListApp()
+        val list: MutableCollection<Int> = LinkedList()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -116,7 +116,7 @@ class LinkedListTest {
 
     @Test
     fun retainingElements() {
-        val list: MutableCollection<Int> = LinkedListApp()
+        val list: MutableCollection<Int> = LinkedList()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -130,7 +130,7 @@ class LinkedListTest {
 
     @Test
     fun printReverseLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -143,7 +143,7 @@ class LinkedListTest {
 
     @Test
     fun getMiddleLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -155,7 +155,7 @@ class LinkedListTest {
 
     @Test
     fun reversedLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.add(3)
         list.add(2)
         list.add(1)
@@ -168,14 +168,14 @@ class LinkedListTest {
 
     @Test
     fun mergeLinkedList() {
-        val list = LinkedListApp<Int>()
+        val list = LinkedList<Int>()
         list.add(1)
         list.add(2)
         list.add(3)
         list.add(4)
         list.add(5)
 
-        val otherList = LinkedListApp<Int>()
+        val otherList = LinkedList<Int>()
         otherList.add(-1)
         otherList.add(0)
         otherList.add(2)

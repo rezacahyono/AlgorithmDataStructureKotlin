@@ -1,7 +1,7 @@
 package linkedlist
 
 
-class LinkedListApp<T> : Iterable<T>, Collection<T>, MutableIterable<T>, MutableCollection<T> {
+class LinkedList<T> : Iterable<T>, Collection<T>, MutableIterable<T>, MutableCollection<T> {
     private var head: Node<T>? = null
     private var tail: Node<T>? = null
     override var size = 0
@@ -23,7 +23,7 @@ class LinkedListApp<T> : Iterable<T>, Collection<T>, MutableIterable<T>, Mutable
     /**
      * Push *Adds a value at front of the list
      */
-    fun push(value: T): LinkedListApp<T> {
+    fun push(value: T): LinkedList<T> {
         head = Node(value = value, next = head)
         if (tail == null) {
             tail = head
@@ -35,7 +35,7 @@ class LinkedListApp<T> : Iterable<T>, Collection<T>, MutableIterable<T>, Mutable
     /**
      * Append *Adds a value at the end of the list
      */
-    fun append(value: T): LinkedListApp<T> {
+    fun append(value: T): LinkedList<T> {
         if (isEmpty()) {
             push(value)
             return this
@@ -207,7 +207,7 @@ class LinkedListApp<T> : Iterable<T>, Collection<T>, MutableIterable<T>, Mutable
 /**
  * Print Reverse
  */
-fun <T> LinkedListApp<T>.printInReverse() {
+fun <T> LinkedList<T>.printInReverse() {
     this.nodeAt(0)?.printInReverse()
 }
 
@@ -222,7 +222,7 @@ fun <T> Node<T>.printInReverse() {
 /**
  * Get Middle node linkedlist
  */
-fun <T> LinkedListApp<T>.getMiddle(): Node<T>? {
+fun <T> LinkedList<T>.getMiddle(): Node<T>? {
     var slow = this.nodeAt(0)
     var fast = this.nodeAt(0)
 
@@ -240,7 +240,7 @@ fun <T> LinkedListApp<T>.getMiddle(): Node<T>? {
 /**
  * Reversed
  */
-private fun <T> addInReverse(list: LinkedListApp<T>, node: Node<T>) {
+private fun <T> addInReverse(list: LinkedList<T>, node: Node<T>) {
 
     val next = node.next
     if (next != null) {
@@ -249,8 +249,8 @@ private fun <T> addInReverse(list: LinkedListApp<T>, node: Node<T>) {
     list.append(node.value)
 }
 
-fun <T> LinkedListApp<T>.reversed(): LinkedListApp<T> {
-    val result = LinkedListApp<T>()
+fun <T> LinkedList<T>.reversed(): LinkedList<T> {
+    val result = LinkedList<T>()
     val head = this.nodeAt(0)
     if (head != null) {
         addInReverse(result, head)
@@ -261,11 +261,11 @@ fun <T> LinkedListApp<T>.reversed(): LinkedListApp<T> {
 /**
  * Merge sorted
  */
-fun <T: Comparable<T>> LinkedListApp<T>.mergeSorted(otherList: LinkedListApp<T>): LinkedListApp<T> {
+fun <T: Comparable<T>> LinkedList<T>.mergeSorted(otherList: LinkedList<T>): LinkedList<T> {
     if (this.isEmpty()) return otherList
     if (otherList.isEmpty()) return this
 
-    val result = LinkedListApp<T>()
+    val result = LinkedList<T>()
 
     var left = nodeAt(0)
     var right = otherList.nodeAt(0)
@@ -288,7 +288,7 @@ fun <T: Comparable<T>> LinkedListApp<T>.mergeSorted(otherList: LinkedListApp<T>)
     return result
 }
 
-private fun <T: Comparable<T>> append(result: LinkedListApp<T>, node: Node<T>): Node<T>?{
+private fun <T: Comparable<T>> append(result: LinkedList<T>, node: Node<T>): Node<T>?{
     result.append(node.value)
     return node.next
 }

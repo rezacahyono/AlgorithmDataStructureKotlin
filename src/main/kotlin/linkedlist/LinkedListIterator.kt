@@ -1,7 +1,7 @@
 package linkedlist
 
 class LinkedListIterator<T>(
-    private val list: LinkedListApp<T>
+    private val list: LinkedList<T>
 ) : Iterator<T>, MutableIterator<T> {
     private var index = 0
 
